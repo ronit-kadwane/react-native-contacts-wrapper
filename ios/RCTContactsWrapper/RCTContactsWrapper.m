@@ -102,7 +102,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
 
 
 - (NSMutableDictionary *) emptyContactDict {
-    return [[NSMutableDictionary alloc] initWithObjects:@[@"", [NSMutableArray array], [NSMutableArray array], [NSMutableArray array]] forKeys:@[@"name", @"phone", @"phoneWithCode", @"email"]];
+    return [[NSMutableDictionary alloc] initWithObjects:@[@"", [NSMutableArray array], [NSMutableArray array], [NSMutableArray array], @""] forKeys:@[@"name", @"phone", @"phoneWithCode", @"email", @"identifier"]];
 }
 
 /**
@@ -127,6 +127,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
              */
             NSMutableDictionary *contactData = [self emptyContactDict];
             
+            NSString *identifier = contact.identifier;
             NSString *fullName = [self getFullNameForFirst:contact.givenName middle:contact.middleName last:contact.familyName ];
             NSArray *phoneNos = contact.phoneNumbers;
             NSArray *emailAddresses = contact.emailAddresses;
@@ -158,7 +159,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
                 [emails addObject: ((CNLabeledValue *)email).value];
             }
             
-            
+            [contactData setValue:identifier forKey:@"identifier"];
             [contactData setValue:phoneWithCode forKey:@"phoneWithCode"];
             [contactData setValue:phones forKey:@"phone"];
             [contactData setValue:emails forKey:@"email"];
