@@ -123,7 +123,7 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
         {
             /* Return NSDictionary ans JS Object to RN, containing basic contact data
              This is a starting point, in future more fields should be added, as required.
-             This could also be extended to return arrays of phone numbers, email addresses etc. instead of jsut first found
+             This could also be extended to return arrays of phone numbers, email addresses etc. instead of just first found
              */
             NSMutableDictionary *contactData = [self emptyContactDict];
             
@@ -146,8 +146,6 @@ RCT_EXPORT_METHOD(getEmail:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseR
                                                @"digits": digits,
                                                @"code": countrycode
                                                };
-                //        NSString *countryCode = phoneObj.valueForKey("countryCode") as? String
-                //        NSString *digits = phoneObj.valueForKey("digits") as? String
                 [phoneWithCode addObject: tempPhoneObj];
                 [phones addObject: digits];
             }
